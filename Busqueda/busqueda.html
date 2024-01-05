@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Busqueda</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div>
+      <div>
+        <h1>Buscador de centros educativos</h1>
+        <div class="mapa"></div>
+
+        <div class="column" id="content">
+          <div class="row">
+            <label>Localidad:</label>
+            <input type="text" name="Add text" placeholder="Add text" />
+          </div>
+          <div class="row" id="margin-bot">
+            <label id="cod_p_text">Cód. Postal:</label>
+            <input
+              type="text"
+              name="Add text"
+              id="cod_postal"
+              placeholder="Add text"
+            />
+          </div>
+          <div class="row">
+            <label>Provincia:</label>
+            <input type="text" name="Add text" placeholder="Add text" />
+          </div>
+          <div class="row">
+            <label>Tipo:</label>
+            <select name="select">
+              <option value="0">Publico</option>
+              <option value="1">Privado</option>
+              <option value="2">Concertado</option>
+              <option value="3">Otros</option>
+            </select>
+          </div>
+          <div class="row">
+            <button type="button" name="Cancelar" id="cancelar">
+              Cancelar
+            </button>
+            <button type="button" name="Buscar" id="aceptar">Buscar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cosas">
+        <div id="busq-lab">
+          <label>Resultados de la búsqueda:</label>
+        </div>
+        <div>
+          <textarea name="textarea" rows="8" cols="138"></textarea>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
