@@ -34,7 +34,44 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  const aceptarBtn = document.getElementById("aceptar");
+  aceptarBtn.addEventListener("click", () => {
+    let murcia = document.getElementById("murcia").checked;
+    let valencia = document.getElementById("valencia").checked;
+    let catalunya = document.getElementById("catalunya").checked;
+    let selectAll = document.getElementById("select-all").checked;
+
+    if (selectAll || murcia) {
+      postToAPI("murcia");
+    }
+    if (selectAll || valencia) {
+      postToAPI("valencia");
+    }
+    if (selectAll || catalunya) {
+      postToAPI("catalunya");
+    }
+  });
 });
+
+function postToAPI(region) {
+  fetch(`http://iei-t2104-v0.dsicv.upv.es:3000/${region}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      /* tus datos aquí */
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
 
 function reset() {
   const selectAllCheckbox = document.getElementById("select-all");
