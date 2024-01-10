@@ -12,44 +12,44 @@ var southWest = L.latLng(36.0, -9.5), // Coordenadas aproximadas del extremo sur
 
 map.setMaxBounds(bounds); // Restringe la vista a estos límites
 
-function buscar() {
-  fetch("IEI-T2104-v0.dsicv.upv.es:3000/general", {
-    method: "POST",
-    body: JSON.stringify({
-      localidad: document.getElementById("localidad").value,
-      provincia: document.getElementById("provincia").value,
-      cod_postal: document.getElementById("cod_postal").value,
-      tipo: document.getElementById("selector").value,
-    }),
-  })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
-}
-// Centros educativos - Ejemplo de array
-var centrosEducativos = [
-  // Añade tus centros educativos aquí
-  {
-    latitud: 40.416775,
-    longitud: -3.70379,
-    nombre: "Centro Educativo Madrid",
-    tipo: "Público",
-  },
-  {
-    latitud: 41.387918266,
-    longitud: 2.139598772,
-    nombre: "Centro Educativo Barcelona",
-    tipo: "Público",
-  },
-  // ...otros centros...
-];
+// function buscar() {
+//   fetch("IEI-T2104-v0.dsicv.upv.es:3000/general", {
+//     method: "POST",
+//     body: JSON.stringify({
+//       localidad: document.getElementById("localidad").value,
+//       provincia: document.getElementById("provincia").value,
+//       cod_postal: document.getElementById("cod_postal").value,
+//       tipo: document.getElementById("selector").value,
+//     }),
+//   })
+//     .then((res) => console.log(res))
+//     .catch((err) => console.log(err));
+// }
+// // Centros educativos - Ejemplo de array
+// var centrosEducativos = [
+//   // Añade tus centros educativos aquí
+//   {
+//     latitud: 40.416775,
+//     longitud: -3.70379,
+//     nombre: "Centro Educativo Madrid",
+//     tipo: "Público",
+//   },
+//   {
+//     latitud: 41.387918266,
+//     longitud: 2.139598772,
+//     nombre: "Centro Educativo Barcelona",
+//     tipo: "Público",
+//   },
+//   // ...otros centros...
+// ];
 
 // Añadir marcadores para cada centro educativo
-centrosEducativos.forEach(function (centro) {
-  var popupContent = centro.nombre + "<br>Tipo: " + centro.tipo;
-  L.marker([centro.latitud, centro.longitud])
-    .bindPopup(popupContent)
-    .addTo(map);
-});
+// centrosEducativos.forEach(function (centro) {
+//   var popupContent = centro.nombre + "<br>Tipo: " + centro.tipo;
+//   L.marker([centro.latitud, centro.longitud])
+//     .bindPopup(popupContent)
+//     .addTo(map);
+// });
 
 function cancelar() {
   document.getElementById("selector").value = "0";
@@ -114,4 +114,56 @@ function updateValueProv(e) {
   } else {
     document.getElementById("aceptar").disabled = true;
   }
+}
+
+const urlAPI = "IEI-T2104-v0.dsicv.upv.es:3000";
+
+function fillTableWithData(data) {
+  const tableBody = document
+    .getElementById("results-table")
+    .querySelector("tbody");
+  tableBody.innerHTML = ""; // Limpiar el cuerpo de la tabla para evitar duplicados
+
+  // Iterar sobre cada elemento de los datos
+  data.forEach((item) => {
+    // Crear una fila de tabla y llenarla con los datos
+    const row = document.createElement("tr");
+    row.innerHTML = `
+            <td>${item.Nombre}</td>
+            <td>${item.Tipo}</td>
+            <td>${item.Dirección}</td>
+            <td>${item.Localidad}</td>
+            <td>${item.CódPostal}</td>
+            <td>${item.Provincia}</td>
+            <td>${item.Descripción}</td>
+            <td>${item.Teléfono}</td>
+            <td>${item.Longitud}</td>
+            <td>${item.Latitud}</td>
+            <td>${item.CPLocalidad}</td>
+            <td>${item.NombreLocalidad}</td>
+            <td>${item.CPProvincia}</td>
+            <td>${item.NombreProvincia}</td>
+        `;
+    tableBody.appendChild(row); // Añadir la fila al cuerpo de la tabla
+  });
+}
+
+// Cargar y mostrar los datos del archivo JSON
+fetch(urlAPI)
+  .then((response) => response.json())
+  .then((data) => fillTableWithData(data))
+  .catch((error) => console.error("Error al cargar los datos:", error));
+
+function buscar() {
+  fetch(urlAPI + "/general", {
+    method: "POST",
+    body: JSON.stringify({
+      localidad: document.getElementById("localidad").value,
+      provincia: document.getElementById("provincia").value,
+      cod_postal: document.getElementById("cod_postal").value,
+      tipo: document.getElementById("selector").value,
+    }),
+  })
+    .then((res) => fillTableWithData(res))
+    .catch((err) => console.log(err));
 }
