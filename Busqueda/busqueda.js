@@ -116,7 +116,7 @@ function updateValueProv(e) {
   }
 }
 
-const urlAPI = "http://iei-t2104-v0.dsicv.upv.es:3000";
+const urlAPI = "http://iei-t2104-v0.dsicv.upv.es:3000/general";
 
 function fillTableWithData(data) {
   const tableBody = document
@@ -148,21 +148,23 @@ function fillTableWithData(data) {
   });
 }
 
-// Cargar y mostrar los datos del archivo JSON
-fetch(urlAPI)
-  .then((response) => response.json())
-  .then((data) => fillTableWithData(data))
-  .catch((error) => console.error("Error al cargar los datos:", error));
-
 function buscar() {
-  fetch(urlAPI + "/general", {
+  const datos = {
+    localidad: document.getElementById("localidad").value,
+    provincia: document.getElementById("provincia").value,
+    cod_postal: document.getElementById("cod_postal").value,
+    tipo: document.getElementById("selector").value,
+  };
+
+  // Convertir el objeto de datos a una cadena de texto
+  const cuerpo = Object.values(datos).join(", "); // Esto es solo un ejemplo, puedes formatear la cadena como prefieras
+
+  fetch(urlAPI, {
     method: "POST",
-    body: JSON.stringify({
-      localidad: document.getElementById("localidad").value,
-      provincia: document.getElementById("provincia").value,
-      cod_postal: document.getElementById("cod_postal").value,
-      tipo: document.getElementById("selector").value,
-    }),
+    headers: {
+      "Content-Type": "text/plain", // Indicar que estás enviando texto
+    },
+    body: cuerpo,
   })
     .then((res) => fillTableWithData(res))
     .catch((err) => console.log(err));
