@@ -149,6 +149,12 @@ function fillTableWithData(data) {
 }
 
 function buscar() {
+  console.log("Buscando...");
+  console.log(document.getElementById("localidad").value);
+  console.log(document.getElementById("provincia").value);
+  console.log(document.getElementById("cod_postal").value);
+  console.log(document.getElementById("selector").value);
+
   const datos = {
     localidad: document.getElementById("localidad").value,
     provincia: document.getElementById("provincia").value,
@@ -157,7 +163,9 @@ function buscar() {
   };
 
   // Convertir el objeto de datos a una cadena de texto
-  const cuerpo = Object.values(datos).join(", "); // Esto es solo un ejemplo, puedes formatear la cadena como prefieras
+  const cuerpo = `{ "localidad": "${datos.localidad}", "cp": "${datos.cod_postal}", "provincia": "${datos.provincia}", "tipo": "${datos.tipo}" }`;
+
+  console.log(cuerpo);
 
   fetch(urlAPI, {
     method: "POST",
