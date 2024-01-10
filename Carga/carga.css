@@ -1,0 +1,133 @@
+body {
+  background-color: #e7e7e7;
+}
+
+h1 {
+  text-align: center;
+  align-items: center;
+  font-size: 50px;
+  margin-top: 50px;
+  margin-bottom: 70px;
+  font-weight: 100;
+}
+
+.fuente-container {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+}
+
+.checkbox-container {
+  display: inline-grid;
+  justify-content: center;
+  margin-bottom: 40px;
+  margin-left: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+button {
+  width: 120px;
+  height: 50px;
+  margin: 0 10px;
+}
+
+#cancelar {
+  border-radius: 6px;
+  border: 1px solid #6488ff;
+  color: #3866fb;
+}
+
+#aceptar {
+  border-radius: 6px;
+  border: 1px solid #6488ff;
+  color: #3866fb;
+}
+
+#aceptar:disabled {
+  border-radius: 6px;
+  border: 1px solid #696969;
+  color: #ffffff;
+  background: #696969;
+}
+
+.cosas {
+  margin-left: 350px;
+  font-size: 25px;
+}
+
+#carga-lab {
+  margin-bottom: 40px;
+}
+
+textarea {
+  width: 65%;
+  box-sizing: border-box;
+  margin-left: 100px;
+}
+
+.checkbox-item {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 9px;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+}
+
+/* Estilo cuando el checkbox está marcado */
+.checkbox-item:checked {
+  background-color: #696969; /* Gris oscuro */
+  border-color: #696969;
+}
+
+/* Estilo para mostrar el tick cuando está marcado */
+.checkbox-item:checked::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-all {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 9px;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+}
+
+/* Estilo cuando el checkbox está marcado */
+.checkbox-all:checked {
+  background-color: #696969; /* Gris oscuro */
+  border-color: #696969;
+}
+
+/* Estilo para mostrar el tick cuando está marcado */
+.checkbox-all:checked::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

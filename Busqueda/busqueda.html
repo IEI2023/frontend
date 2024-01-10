@@ -4,18 +4,26 @@
     <meta charset="utf-8" />
     <title>Busqueda</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../leaflet/leaflet.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
   <body>
     <div>
       <div>
         <h1>Buscador de centros educativos</h1>
-        <div class="mapa"></div>
-
+        <div id="map"></div>
+        <script src="../leaflet/leaflet.js"></script>
+        <script src="busqueda.js"></script>
         <div class="column" id="content">
           <div class="row">
             <label>Localidad:</label>
-            <input type="text" name="Add text" placeholder="Add text" />
+            <input
+              type="text"
+              name="Add text"
+              placeholder="Add text"
+              id="localidad"
+            />
           </div>
           <div class="row" id="margin-bot">
             <label id="cod_p_text">Cód. Postal:</label>
@@ -28,11 +36,16 @@
           </div>
           <div class="row">
             <label>Provincia:</label>
-            <input type="text" name="Add text" placeholder="Add text" />
+            <input
+              type="text"
+              name="Add text"
+              placeholder="Add text"
+              id="provincia"
+            />
           </div>
           <div class="row">
             <label>Tipo:</label>
-            <select name="select">
+            <select name="select" id="selector">
               <option value="0">Publico</option>
               <option value="1">Privado</option>
               <option value="2">Concertado</option>
@@ -40,10 +53,17 @@
             </select>
           </div>
           <div class="row">
-            <button type="button" name="Cancelar" id="cancelar">
+            <button
+              type="button"
+              name="Cancelar"
+              id="cancelar"
+              onclick="cancelar()"
+            >
               Cancelar
             </button>
-            <button type="button" name="Buscar" id="aceptar">Buscar</button>
+            <button type="button" name="Buscar" id="aceptar" disabled>
+              Buscar
+            </button>
           </div>
         </div>
       </div>
@@ -53,7 +73,13 @@
           <label>Resultados de la búsqueda:</label>
         </div>
         <div>
-          <textarea name="textarea" rows="8" cols="138"></textarea>
+          <textarea
+            readonly
+            name="textarea"
+            rows="8"
+            cols="138"
+            id="results"
+          ></textarea>
         </div>
       </div>
     </div>

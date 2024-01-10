@@ -1,3 +1,7 @@
+body {
+  background-color: #e7e7e7;
+}
+
 h1 {
   text-align: center;
   align-items: center;
@@ -39,14 +43,6 @@ select {
   margin-bottom: 20px;
 }
 
-.mapa {
-  width: 300px;
-  height: 300px;
-  background: #d80101;
-  position: absolute;
-  right: 20%;
-}
-
 button {
   width: 120px;
   height: 50px;
@@ -62,15 +58,35 @@ button {
 
 #aceptar {
   border-radius: 6px;
+  border: 1px solid #6488ff;
+  color: #3866fb;
+}
+
+#aceptar:disabled {
+  border-radius: 6px;
   border: 1px solid #696969;
   color: #ffffff;
   background: #696969;
 }
 
 .cosas {
-  margin-left: 150px;
+  margin-left: 250px;
+  margin-top: 200px;
 }
 
 #busq-lab {
   margin-bottom: 20px;
+}
+
+#map {
+  height: 500px;
+  width: 37%;
+  position: absolute;
+  right: 5%;
+}
+
+textarea {
+  width: 65%;
+  box-sizing: border-box;
+  margin-left: 150px;
 }

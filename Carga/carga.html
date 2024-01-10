@@ -2,49 +2,69 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Busqueda</title>
-    <link rel="stylesheet" href="css/carga.css" />
+    <title>Carga</title>
+    <link rel="stylesheet" href="carga.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="carga.js" defer></script>
   </head>
 
   <body>
     <div class="column">
       <h1>Carga del almacén de datos</h1>
-      <div class="row">
+      <div class="row fuente-container">
         <label>Seleccione fuente:</label>
 
-        <div class="column">
+        <div class="column checkbox-container">
           <label>
-            <input type="checkbox" class="radio" value="1" />Seleccionar todos
+            <input
+              type="checkbox"
+              id="select-all"
+              class="radio checkbox-all"
+            />Seleccionar todos
           </label>
           <div>
             <label>
-              <input type="checkbox" class="radio" value="1" />Murcia
+              <input
+                type="checkbox"
+                class="radio checkbox-item"
+                id="murcia"
+              />Murcia
             </label>
           </div>
           <div>
             <label>
-              <input type="checkbox" class="radio" value="1" />Comunitat
-              Valenciana
+              <input
+                type="checkbox"
+                class="radio checkbox-item"
+                id="valencia"
+              />Comunitat Valenciana
             </label>
           </div>
           <label>
-            <input type="checkbox" class="radio" value="1" />Catalunya
+            <input
+              type="checkbox"
+              class="radio checkbox-item"
+              id="catalunya"
+            />Catalunya
           </label>
         </div>
       </div>
 
-      <div class="row">
-        <button type="button" name="Cancelar">Cancelar</button>
-        <button type="button" name="Cargar">Cargar</button>
+      <div class="row button-container">
+        <button type="button" name="Cancelar" id="cancelar" onclick="reset()">
+          Cancelar
+        </button>
+        <button type="button" name="Cargar" id="aceptar" disabled>
+          Cargar
+        </button>
       </div>
 
-      <div class="column">
-        <div>
+      <div class="cosas">
+        <div id="carga-lab">
           <label>Resultados de la carga:</label>
         </div>
         <div>
-          <textarea name="textarea" rows="8" cols="80"></textarea>
+          <textarea readonly name="textarea" rows="8" cols="80"></textarea>
         </div>
       </div>
     </div>
