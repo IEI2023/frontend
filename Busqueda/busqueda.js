@@ -169,3 +169,27 @@ function buscar() {
     .then((res) => fillTableWithData(res))
     .catch((err) => console.log(err));
 }
+
+let centrosEducativos = [];
+
+/**
+ * en caso de que no sea una llamada POST y sea una de tipo GET
+ * recordar que habría que cambiar la url y seguramente separar
+ * el baseUrl de "general" en el método buscar()
+ */
+
+fetch(urlAPI, {
+  method: "POST",
+  headers: {
+    "Content-Type": "text/plain",
+  },
+})
+  .then((centrosEducativos) => centrosEducativos.json())
+  .catch((err) => console.log(err));
+
+centrosEducativos.forEach(function (centro) {
+  var popupContent = centro.nombre + "<br>Tipo: " + centro.tipo;
+  L.marker([centro.latitud, centro.longitud])
+    .bindPopup(popupContent)
+    .addTo(map);
+});
