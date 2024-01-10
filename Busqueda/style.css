@@ -95,5 +95,14 @@ textarea {
   /* revisar pq está copiado de arriba */
   width: 65%;
   box-sizing: border-box;
-  margin-left: 150px;
+  background: #b0b0b0;
+  font-size: 0.75em;
+}
+
+#tabla th {
+  padding: 12px 15px;
+}
+
+#tabla tr {
+  background-color: #e7e7e7;
 }

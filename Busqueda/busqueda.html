@@ -61,7 +61,13 @@
             >
               Cancelar
             </button>
-            <button type="button" name="Buscar" id="aceptar" disabled>
+            <button
+              type="button"
+              name="Buscar"
+              id="aceptar"
+              onclick="buscar()"
+              disabled
+            >
               Buscar
             </button>
           </div>
@@ -73,7 +79,7 @@
           <label>Resultados de la búsqueda:</label>
         </div>
         <div>
-          <table id="tabla">
+          <table class="content-table" id="tabla">
             <tr>
               <th scope="row">Nombre</th>
               <th scope="row">Tipo</th>

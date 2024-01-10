@@ -12,6 +12,19 @@ var southWest = L.latLng(36.0, -9.5), // Coordenadas aproximadas del extremo sur
 
 map.setMaxBounds(bounds); // Restringe la vista a estos límites
 
+function buscar() {
+  fetch("IEI-T2104-v0.dsicv.upv.es:3000/general", {
+    method: "POST",
+    body: JSON.stringify({
+      localidad: document.getElementById("localidad").value,
+      provincia: document.getElementById("provincia").value,
+      cod_postal: document.getElementById("cod_postal").value,
+      tipo: document.getElementById("selector").value,
+    }),
+  })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+}
 // Centros educativos - Ejemplo de array
 var centrosEducativos = [
   // Añade tus centros educativos aquí
