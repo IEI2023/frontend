@@ -119,42 +119,35 @@ function updateValueProv(e) {
 const urlAPI = "http://iei-t2104-v0.dsicv.upv.es:3000/general";
 
 function fillTableWithData(data) {
-  const tableBody = document
-    .getElementById("results-table")
-    .querySelector("tbody");
+  const tableBody = document.getElementById("tabla").querySelector("tbody");
   tableBody.innerHTML = ""; // Limpiar el cuerpo de la tabla para evitar duplicados
+
+  // Verificar que los datos sean un array
+  if (!Array.isArray(data)) {
+    console.error("La respuesta no es un array:", data);
+    return;
+  }
 
   // Iterar sobre cada elemento de los datos
   data.forEach((item) => {
-    // Crear una fila de tabla y llenarla con los datos
-    const row = document.createElement("tr");
+    console.log(item);
+    const row = tableBody.insertRow(); // Crear una fila
+
     row.innerHTML = `
-            <td>${item.Nombre}</td>
-            <td>${item.Tipo}</td>
-            <td>${item.Dirección}</td>
-            <td>${item.Localidad}</td>
-            <td>${item.CódPostal}</td>
-            <td>${item.Provincia}</td>
-            <td>${item.Descripción}</td>
-            <td>${item.Teléfono}</td>
-            <td>${item.Longitud}</td>
-            <td>${item.Latitud}</td>
-            <td>${item.CPLocalidad}</td>
-            <td>${item.NombreLocalidad}</td>
-            <td>${item.CPProvincia}</td>
-            <td>${item.NombreProvincia}</td>
-        `;
-    tableBody.appendChild(row); // Añadir la fila al cuerpo de la tabla
+      <td>${item.nombre || "-"}</td>
+      <td>${item.tipo || "-"}</td>
+      <td>${item.direccion || "-"}</td>
+      <td>${item.codigoPostal || "-"}</td>
+      <td>${item.longitud || "-"}</td>
+      <td>${item.latitud || "-"}</td>
+      <td>${item.telefono || "-"}</td>
+      <td>${item.descipcion || "-"}</td>
+      <td>${item.localidad.nombre || "-"}</td>
+    `;
   });
 }
 
 function buscar() {
-  console.log("Buscando...");
-  console.log(document.getElementById("localidad").value);
-  console.log(document.getElementById("provincia").value);
-  console.log(document.getElementById("cod_postal").value);
-  console.log(document.getElementById("selector").value);
-
   const datos = {
     localidad: document.getElementById("localidad").value,
     provincia: document.getElementById("provincia").value,
@@ -165,8 +158,6 @@ function buscar() {
   // Convertir el objeto de datos a una cadena de texto
   const cuerpo = `{ "localidad": "${datos.localidad}", "cp": "${datos.cod_postal}", "provincia": "${datos.provincia}", "tipo": "${datos.tipo}" }`;
 
-  console.log(cuerpo);
-
   fetch(urlAPI, {
     method: "POST",
     headers: {
@@ -174,6 +165,7 @@ function buscar() {
     },
     body: cuerpo,
   })
+    .then((res) => res.json())
     .then((res) => fillTableWithData(res))
     .catch((err) => console.log(err));
 }
