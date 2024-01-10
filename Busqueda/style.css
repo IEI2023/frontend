@@ -90,3 +90,10 @@ textarea {
   box-sizing: border-box;
   margin-left: 150px;
 }
+
+#tabla {
+  /* revisar pq está copiado de arriba */
+  width: 65%;
+  box-sizing: border-box;
+  margin-left: 150px;
+}
