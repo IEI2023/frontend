@@ -116,7 +116,7 @@ function updateValueProv(e) {
   }
 }
 
-const urlAPI = "IEI-T2104-v0.dsicv.upv.es:3000";
+const urlAPI = "http://iei-t2104-v0.dsicv.upv.es:3000";
 
 function fillTableWithData(data) {
   const tableBody = document
