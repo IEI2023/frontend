@@ -42,36 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let catalunya = document.getElementById("catalunya").checked;
     let selectAll = document.getElementById("select-all").checked;
 
+    document.getElementsByName("response")[0].value = "";
+
     if (selectAll || murcia) {
-      postToAPI("murcia");
+      loadMurciaData();
     }
     if (selectAll || valencia) {
-      postToAPI("valencia");
+      loadValenciaData();
     }
     if (selectAll || catalunya) {
-      postToAPI("catalunya");
+      loadCatalunaData();
     }
   });
 });
-
-function postToAPI(region) {
-  fetch(`http://iei-t2104-v0.dsicv.upv.es:3000/${region}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      /* tus datos aquí */
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
 
 function reset() {
   const selectAllCheckbox = document.getElementById("select-all");
@@ -84,4 +67,72 @@ function reset() {
   valencia.checked = false;
   catalunya.checked = false;
   document.getElementById("aceptar").disabled = true;
+}
+
+function loadMurciaData() {
+  // Usar fetch para obtener el archivo local
+  fetch("http://localhost:3000/murcia")
+    .then((response) => response.json()) // Convertir la respuesta a un objeto JSON
+    .then((data) => {
+      console.log(data);
+      const conteo = `Datos introducidos correctamente: ${data.successCount}\n\nDatos no introducidos: ${data.errorCount}\n\nRegistros con errores:\n`;
+
+      if (data.errors && Array.isArray(data.errors)) {
+        const errores = data.errors.join("\n");
+        console.log(errores);
+        document.getElementsByName("response")[0].value = document
+          .getElementsByName("response")[0]
+          .value.concat(conteo, errores);
+      } else {
+        document.getElementsByName("response")[0].value =
+          "No se encontraron errores o el formato es incorrecto.";
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function loadCatalunaData() {
+  // Usar fetch para obtener el archivo local
+  fetch("http://localhost:3000/cataluna")
+    .then((response) => response.json()) // Convertir la respuesta a un objeto JSON
+    .then((data) => {
+      const conteo = `Datos introducidos correctamente: ${data.successCount}\n\nDatos no introducidos: ${data.errorCount}\n\nRegistros con errores:\n`;
+
+      if (data.errors && Array.isArray(data.errors)) {
+        const errores = data.errors.join("\n");
+        document.getElementsByName("response")[0].value = document
+          .getElementsByName("response")[0]
+          .value.concat(conteo, errores);
+      } else {
+        document.getElementsByName("response")[0].value =
+          "No se encontraron errores o el formato es incorrecto.";
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function loadValenciaData() {
+  // Usar fetch para obtener el archivo local
+  fetch("http://localhost:3000/valencia")
+    .then((response) => response.json()) // Convertir la respuesta a un objeto JSON
+    .then((data) => {
+      const conteo = `Datos introducidos correctamente: ${data.successCount}\n\nDatos no introducidos: ${data.errorCount}\n\nRegistros con errores:\n`;
+
+      if (data.errors && Array.isArray(data.errors)) {
+        const errores = data.errors.join("\n");
+        document.getElementsByName("response")[0].value = document
+          .getElementsByName("response")[0]
+          .value.concat(conteo, errores);
+      } else {
+        document.getElementsByName("response")[0].value =
+          "No se encontraron errores o el formato es incorrecto.";
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
